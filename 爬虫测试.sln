@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "爬虫测试", "爬虫测试\爬虫测试.csproj", "{3581DB8D-6A82-4B41-B38C-51E62FFEAA1D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{A0429BA9-DB12-43F0-B889-3E5864B9C22E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "专升本报录", "专升本报录\专升本报录.csproj", "{F953C19A-70F9-45A2-B23F-3E17BF3A5008}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FBD62BCC-F292-478E-BD54-4F0345E1CF93}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "专升本爬虫WPF", "专升本爬虫WPF", "{5BED4947-CEE5-48B6-A93A-28AF65F7DEB3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpRequest", "HttpRequest\HttpRequest.csproj", "{4E5CA4C3-9BD3-4427-9269-364AF7A74912}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{2472FA34-59C9-42F4-BD43-B0711F37826C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Telegra.phCrawler", "Telegra.phCrawler", "{8BC8B092-2EB8-47C6-A5A4-BF60D4B65259}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegraCrawler.WPFApplication", "TelegraCrawler.WPFApplication\TelegraCrawler.WPFApplication.csproj", "{9688FDDE-4549-4FA3-B8F3-F201C011EBF7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3581DB8D-6A82-4B41-B38C-51E62FFEAA1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3581DB8D-6A82-4B41-B38C-51E62FFEAA1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3581DB8D-6A82-4B41-B38C-51E62FFEAA1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3581DB8D-6A82-4B41-B38C-51E62FFEAA1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0429BA9-DB12-43F0-B889-3E5864B9C22E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0429BA9-DB12-43F0-B889-3E5864B9C22E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0429BA9-DB12-43F0-B889-3E5864B9C22E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0429BA9-DB12-43F0-B889-3E5864B9C22E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F953C19A-70F9-45A2-B23F-3E17BF3A5008}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F953C19A-70F9-45A2-B23F-3E17BF3A5008}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F953C19A-70F9-45A2-B23F-3E17BF3A5008}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F953C19A-70F9-45A2-B23F-3E17BF3A5008}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E5CA4C3-9BD3-4427-9269-364AF7A74912}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E5CA4C3-9BD3-4427-9269-364AF7A74912}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E5CA4C3-9BD3-4427-9269-364AF7A74912}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E5CA4C3-9BD3-4427-9269-364AF7A74912}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2472FA34-59C9-42F4-BD43-B0711F37826C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2472FA34-59C9-42F4-BD43-B0711F37826C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2472FA34-59C9-42F4-BD43-B0711F37826C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2472FA34-59C9-42F4-BD43-B0711F37826C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9688FDDE-4549-4FA3-B8F3-F201C011EBF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9688FDDE-4549-4FA3-B8F3-F201C011EBF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9688FDDE-4549-4FA3-B8F3-F201C011EBF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9688FDDE-4549-4FA3-B8F3-F201C011EBF7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F953C19A-70F9-45A2-B23F-3E17BF3A5008} = {5BED4947-CEE5-48B6-A93A-28AF65F7DEB3}
+		{4E5CA4C3-9BD3-4427-9269-364AF7A74912} = {5BED4947-CEE5-48B6-A93A-28AF65F7DEB3}
+		{2472FA34-59C9-42F4-BD43-B0711F37826C} = {5BED4947-CEE5-48B6-A93A-28AF65F7DEB3}
+		{9688FDDE-4549-4FA3-B8F3-F201C011EBF7} = {8BC8B092-2EB8-47C6-A5A4-BF60D4B65259}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {59645D8D-702B-458B-A88B-5021B1A71B99}
+	EndGlobalSection
+EndGlobal

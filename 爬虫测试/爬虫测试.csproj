@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWPF>true</UseWPF>
+		<UseWindowsForms>true</UseWindowsForms>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Include="..\.editorconfig" Link=".editorconfig" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.VisualStudio.Services.Client" Version="16.170.0" />
+		<PackageReference Include="Nancy" Version="2.0.0" />
+		<PackageReference Include="RestSharp" Version="106.15.0" />
+		<PackageReference Include="SeleniumUtil" Version="1.1.6" />
+		<PackageReference Include="System.Management" Version="6.0.0" />
+	</ItemGroup>
+
+</Project>
