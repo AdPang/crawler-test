@@ -9,10 +9,11 @@ namespace TelegraCrawler.WPFApplication.Model
 {
     public enum DownloadStatu
     {
-        GettingWebContent,
-        WaitForDownload,
-        Downloading,
-        Downloaded,
+        GettingWebContent = 1,
+        WaitForDownload = 2,
+        Downloading = 4,
+        Downloaded = 8,
+        DownloadedHasError = 16
     }
     public class WebDetail : BaseModel
     {

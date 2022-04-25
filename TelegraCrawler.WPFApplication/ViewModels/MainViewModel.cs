@@ -73,7 +73,7 @@ namespace TelegraCrawler.WPFApplication.ViewModels
                     {
                         return;
                     }
-                    DownloadFileHelper df = new DownloadFileHelper(item, globalExceptionUrl);
+                    DownloadFileHelper df = new(item);
                     item.DownloadStatus = DownloadStatu.Downloading;
                 });
 
@@ -84,7 +84,6 @@ namespace TelegraCrawler.WPFApplication.ViewModels
         public DelegateCommand SearchCommand { get; private set; }
         public DelegateCommand<string> OpearCommand { get; set; }
 
-        private List<KeyValuePair<int, string>> globalExceptionUrl=new();
         private ObservableCollection<WebDetail> webDetailCollection = new();
         private string urlStr = "";
         private readonly CrawlerHelper crawlerHelper;

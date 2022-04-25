@@ -65,40 +65,21 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+        <StackPanel Grid.Column="0"
+                    Grid.Row="2"
+                    Orientation="Horizontal">
             <Button Content="StartDownload"
                     Height="50"
                     Margin="10"
-                    Width="auto" 
+                    Width="auto"
                     Command="{Binding OpearCommand}"
-                    CommandParameter="StartDownload"/>
+                    CommandParameter="StartDownload" />
             <Button Content="OpenDownloadDir"
                     Height="50"
                     Margin="10"
                     Width="auto"
-                    Command="{Binding OpearCommand}" 
-                    CommandParameter="OpenDownloadDir"/>
+                    Command="{Binding OpearCommand}"
+                    CommandParameter="OpenDownloadDir" />
         </StackPanel>
-        
-        <!--<StackPanel>
-            <ListBox ItemsSource="{Binding UrlCollection}"
-                     BorderThickness="0" VerticalContentAlignment="Top">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Id}"/>
-                            <TextBlock Text="{Binding Title}"/>
-                            <TextBlock Text="{Binding ImageCount}" />
-                            <TextBlock HorizontalAlignment="Center"
-                                       FontSize="16"
-                                       Text="{Binding Url}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-
-
-            </ListBox>
-        </StackPanel>-->
-
     </Grid>
 </Window>

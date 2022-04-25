@@ -16,75 +16,39 @@ using RestSharp;
 
 namespace 爬虫测试
 {
-    class Program
+    public class Program
     {
         public static void Main()
         {
-            Solution solution = new Solution();
-            Console.WriteLine(solution.LongestCommonPrefix(new string[] { "cir", "car" })); 
-            //var token = GetToken("17671655819", "xztaw520.");
-            //GetData(token);
+
+            var files = GetAllFileByContainsStrName(@"C:\Users\AdminPang\Downloads\game", "百度");
+            Console.WriteLine(files.Count);
+
         }
 
-
-        private static void GetData(string token)
+        static void GetAllFiles(DirectoryInfo rootDir,List<FileInfo> files)
         {
-            try
+            var childrenDir = rootDir.GetDirectories();
+            foreach (var dir in childrenDir)
             {
-                var client = new RestClient("https://zsb.e21.cn/api/v1/statistics/applyNum?total=672&_page=1&_limit=672&universityId=&majorId=&applyRate=");
-                client.Timeout = -1;
-                var request = new RestRequest(Method.GET);
-
-                request.AddHeader("Authorization", $"Bearer {token}");
-
-                IRestResponse response = client.Execute(request);
-                var httpResult = JsonConvert.DeserializeObject<DataApiRespond>(response.Content);
-                //List<RecordsItem>
-                var records = httpResult.data.records.FindAll(x => (x.majorName.Equals("物联网工程") || x.majorName.Equals("软件工程") || x.majorName.Equals("计算机与科学"))).ToList();
-
-                PrintData(records);
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Exception Message{e.Message},Exception StackTrace{e.StackTrace}");
-                return;
+                GetAllFiles(dir, files);
+                files.AddRange(dir.GetFiles());
             }
         }
 
-
-        private static void PrintData(ICollection<RecordsItem> collection)
+        static bool IsFileContentContainsStr(FileInfo file,string containsContentStr)
         {
-            RecordsItem.PrintTitle();
-            foreach (var item in collection)
-            {
-                Console.WriteLine($"{item.universityName}\t\t\t\t\t\t{item.majorId}\t{item.majorName}\t{item.number}\t{item.count}");
-            }
+            string contents = File.ReadAllText(file.FullName);
+            return contents.Contains(containsContentStr);
         }
 
-        private static string GetToken(string username, string password)
+        static List<FileInfo> GetAllFileByContainsStrName(string path,string containsName)
         {
-            try
-            {
-                var client = new RestClient("https://zsb.e21.cn/oauth/token");
-                client.Timeout = -1;
-                var request = new RestRequest(Method.POST);
-                request.AddHeader("Authorization", "Basic Y2xpZW50LTAxOmNsaWVudC0wMS1zZWNyZXQ=");
-                request.AlwaysMultipartFormData = true;
-                request.AddParameter("grant_type", "password");
-                request.AddParameter("scope", "all");
-                request.AddParameter("username", username);
-                request.AddParameter("password", password);
-                IRestResponse response = client.Execute(request);
-                var result = JsonConvert.DeserializeObject<LoginApiRespond<Success>>(response.Content);
-                string token = result.data.access_token;
-                return token;
-            }
-            catch
-            {
-                return null;
-            }
-
+            var files = new DirectoryInfo(path);
+            var filesList = new List<FileInfo>();
+            GetAllFiles(files, filesList);
+            filesList = filesList.Where(x => IsFileContentContainsStr(x, containsName)).ToList();
+            return filesList;
         }
 
     }
