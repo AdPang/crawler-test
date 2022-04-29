@@ -35,12 +35,11 @@ namespace TelegraCrawler.WPFApplication.Common.Helper.HttpHelper
             for (int imageIndex = 0; imageIndex < webDetail.ImagesSrc.Count; imageIndex++)
                 imageFiles.Add(new KeyValuePair<int, string>(imageIndex + 1, webDetail.ImagesSrc[imageIndex]));
 
-            DownloadImage();
         }
 
         
         
-        private void DownloadImage()
+        public void DownloadImage()
         {
 
             Task.Run(() =>

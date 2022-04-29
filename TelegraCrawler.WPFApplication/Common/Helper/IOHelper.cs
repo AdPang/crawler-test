@@ -33,7 +33,6 @@ namespace TelegraCrawler.WPFApplication.Common.Helper
                 }
                 Directory.CreateDirectory(path);
                 return path;
-
             }
             catch (Exception)
             {

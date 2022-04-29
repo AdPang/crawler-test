@@ -1,18 +1,4 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using Nancy.Json;
-using Newtonsoft.Json;
-using SeleniumUtil;
-using SeleniumUtil.Entitys;
-using System.Diagnostics;
-using System.IO;
-using System.Management;
-using System.Reflection;
-using System.Text;
-using 爬虫测试;
-using Size = SeleniumUtil.Entitys.Size;
-
-using System.Linq;
-using RestSharp;
 
 namespace 爬虫测试
 {
@@ -21,35 +7,9 @@ namespace 爬虫测试
         public static void Main()
         {
 
-            var files = GetAllFileByContainsStrName(@"C:\Users\AdminPang\Downloads\game", "百度");
-            Console.WriteLine(files.Count);
-
         }
 
-        static void GetAllFiles(DirectoryInfo rootDir,List<FileInfo> files)
-        {
-            var childrenDir = rootDir.GetDirectories();
-            foreach (var dir in childrenDir)
-            {
-                GetAllFiles(dir, files);
-                files.AddRange(dir.GetFiles());
-            }
-        }
-
-        static bool IsFileContentContainsStr(FileInfo file,string containsContentStr)
-        {
-            string contents = File.ReadAllText(file.FullName);
-            return contents.Contains(containsContentStr);
-        }
-
-        static List<FileInfo> GetAllFileByContainsStrName(string path,string containsName)
-        {
-            var files = new DirectoryInfo(path);
-            var filesList = new List<FileInfo>();
-            GetAllFiles(files, filesList);
-            filesList = filesList.Where(x => IsFileContentContainsStr(x, containsName)).ToList();
-            return filesList;
-        }
+        
 
     }
 }

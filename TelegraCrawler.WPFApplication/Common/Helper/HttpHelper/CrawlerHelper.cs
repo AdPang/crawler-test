@@ -9,11 +9,6 @@ namespace TelegraCrawler.WPFApplication.Common.Helper.HttpHelper
 {
     public class CrawlerHelper
     {
-        public CrawlerHelper()
-        {
-
-        }
-
         public async Task<string> GetWebContent(string url)
         {
             var client = new RestClient(url)

@@ -22,6 +22,35 @@ namespace TelegraCrawler.WPFApplication.Views
         public MainView()
         {
             InitializeComponent();
+
+            btnMin.Click += (s, e) => { this.WindowState = WindowState.Minimized; };
+            btnMax.Click += (s, e) =>
+            {
+                if (this.WindowState == WindowState.Maximized)
+                {
+                    this.WindowState = WindowState.Normal;
+                    this.btnMax.Content = "☐";
+                }
+                else
+                {
+                    this.WindowState = WindowState.Maximized;
+                    this.btnMax.Content = "❐";
+                }
+            };
+            btnClose.Click += (s, e) =>
+            {
+
+                this.Close();
+            };
+
+            title.MouseMove += (s, e) =>
+            {
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    this.DragMove();
+                }
+            };
+
         }
     }
 }

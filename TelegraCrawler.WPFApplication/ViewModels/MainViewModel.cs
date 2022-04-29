@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using TelegraCrawler.WPFApplication.Common.Helper;
 using TelegraCrawler.WPFApplication.Common.Helper.HttpHelper;
 using TelegraCrawler.WPFApplication.Model;
 
@@ -17,29 +18,33 @@ namespace TelegraCrawler.WPFApplication.ViewModels
     internal class MainViewModel : BindableBase
     {
 
-        
         public MainViewModel(CrawlerHelper crawlerHelper)
         {
             this.crawlerHelper = crawlerHelper;
             InitCommands();
         }
-
+        private void ActionX(object fileName)
+        {
+            Console.WriteLine(fileName);
+            Thread.Sleep(2000);
+            Console.WriteLine(fileName);
+        }
         private void InitCommands()
         {
             SearchCommand = new DelegateCommand(() =>
             {
-                if (string.IsNullOrEmpty(UrlStr) || !IsUrl(UrlStr)) return;
+                if (string.IsNullOrWhiteSpace(UrlStr) || string.IsNullOrEmpty(UrlStr) || !UrlStr.IsUrl()) return;
                 //判断是否有重复
                 if (WebDetailCollection.ToList().Find(x => urlStr.ToLowerInvariant().Trim().Equals(x.Url)) is not null) return;
 
                 var webDetail = new WebDetail() { Url = UrlStr.ToLowerInvariant().Trim(), Id = urlIndex++ };
-                var td = new Thread(async () =>
+
+                Task.Factory.StartNew(async p => 
                 {
-                    string webContent = await crawlerHelper.GetWebContent(UrlStr);
+                    string url = p?.ToString() ?? "";
+                    string webContent = await crawlerHelper.GetWebContent(url);
                     DeserializHtml(webContent, webDetail);
-                })
-                { IsBackground = true };
-                td.Start();
+                }, UrlStr);
 
                 WebDetailCollection.Add(webDetail);
 
@@ -65,16 +70,17 @@ namespace TelegraCrawler.WPFApplication.ViewModels
 
         private void StartDownloadImage()
         {
-            foreach (var item in WebDetailCollection)
+            foreach (var webDetail in WebDetailCollection)
             {
                 var t = Task.Factory.StartNew(() =>
                 {
-                    if (item.DownloadStatus != DownloadStatu.WaitForDownload)
+                    if (webDetail.DownloadStatus != DownloadStatu.WaitForDownload)
                     {
                         return;
                     }
-                    DownloadFileHelper df = new(item);
-                    item.DownloadStatus = DownloadStatu.Downloading;
+                    DownloadFileHelper df = new(webDetail);
+                    df.DownloadImage();
+                    webDetail.DownloadStatus = DownloadStatu.Downloading;
                 });
 
             }
@@ -122,47 +128,23 @@ namespace TelegraCrawler.WPFApplication.ViewModels
             //获取网页title
             var htmlDocument = doc.DocumentNode.ChildNodes["html"];//.EndNode.ChildNodes["html"].ChildNodes["head"].ChildNodes["title"].InnerHtml;
             List<HtmlNode> titleNodes = new();
-            FindImgNode(x => x.Name.ToLowerInvariant().Equals("title"), htmlDocument, titleNodes);
+            htmlDocument.FindImgNode(x => x.Name.ToLowerInvariant().Equals("title"), titleNodes);
             webDetail.Title = titleNodes.FirstOrDefault()?.InnerHtml ?? "";
             List<HtmlNode> imageNodes = new();
-            FindImgNode(x => x.Name.ToLowerInvariant().Equals("img"), htmlDocument, imageNodes);
+            htmlDocument.FindImgNode(x => x.Name.ToLowerInvariant().Equals("img"), imageNodes);
             webDetail.ImageCount = imageNodes.Count;
             webDetail.ImagesSrc.AddRange(imageNodes.Select(x => x.Attributes["src"].Value));
             for (int i = 0; i < webDetail.ImagesSrc.Count; i++)
             {
-                if (!IsUrl(webDetail.ImagesSrc[i]))
+                if (!webDetail.ImagesSrc[i].IsUrl())
                 {
                     webDetail.ImagesSrc[i] = @"https://telegra.ph" + webDetail.ImagesSrc[i];
                 }
             }
-
             webDetail.DownloadStatus = DownloadStatu.WaitForDownload;
         }
 
-        private void FindImgNode(Func<HtmlNode, bool> func, HtmlNode parentNode, ICollection<HtmlNode> nodes)
-        {
-            foreach (var item in parentNode.ChildNodes)
-            {
-                FindImgNode(func, item, nodes);
-                if (func.Invoke(item))
-                {
-                    nodes.Add(item);
-                }
-            }
-        }
 
 
-        public static bool IsUrl(string str)
-        {
-            try
-            {
-                string Url = @"^http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?$";
-                return Regex.IsMatch(str, Url);
-            }
-            catch
-            {
-                return false;
-            }
-        }
     }
 }

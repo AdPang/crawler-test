@@ -6,80 +6,133 @@
         xmlns:local="clr-namespace:TelegraCrawler.WPFApplication.Views"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
         FontFamily="微软雅黑"
         FontSize="25"
         Title="MianView"
         Height="900"
         Width="1600">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="auto" />
-            
-            
-        </Grid.ColumnDefinitions>
-
+    <Grid x:Name="mainGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" />
             <RowDefinition />
-            <RowDefinition Height="auto"/>
+            
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="maxWidth" Width="1*" />
+        </Grid.ColumnDefinitions>
+        <DockPanel LastChildFill="False"
+                   x:Name="title"
+                   Grid.Row="0"
+                   Width="{Binding Path=ActualWidth,ElementName=mainGrid}">
+            <StackPanel Orientation="Horizontal"
+                        DockPanel.Dock="Right">
+                <Button x:Name="btnMin"
+                        Margin="5"
+                        Content="—"
+                        Style="{StaticResource MaterialDesignFlatMidBgButton}" />
+                <Button x:Name="btnMax"
+                        Margin="5"
+                        Content="☐"
+                        Style="{StaticResource MaterialDesignFlatMidBgButton}" />
+                <Button x:Name="btnClose"
+                        Margin="5"
+                        Content="✕"
+                        Style="{StaticResource MaterialDesignFlatMidBgButton}"
+                        Cursor="Hand" />
+            </StackPanel>
+        </DockPanel>
+        
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto" />
 
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Margin="30" Height="70">
-            <TextBox Margin="5"
-                     Width="1200"
-                     md:HintAssist.Hint="url..."
-                     md:TextFieldAssist.HasClearButton="True"
-                     Text="{Binding UrlStr,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
-                <TextBox.InputBindings>
-                    <KeyBinding Key="Enter"
-                                Command="{Binding SearchCommand}"
-                                CommandParameter="Search" />
-                </TextBox.InputBindings>
-            </TextBox>
-            <Button Command="{Binding SearchCommand}"
-                    CommandParameter="Search"
-                    Content="Add"
-                    Height="50"
-                    Margin="5" />
-        </StackPanel>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
 
 
-        <DataGrid Grid.Row="1"
-                  Grid.Column="0"
-                  IsReadOnly="True"
-                  Margin="10"
-                  ItemsSource="{Binding WebDetailCollection}"
-                  AutoGenerateColumns="False"
-                  x:Name="DgData">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Id}"
-                                    Header="#"
-                                    Width="1*" />
-                <DataGridTextColumn Binding="{Binding Title}" Header="Title" Width="6*"/>
-                <DataGridTextColumn Binding="{Binding ImageCount}" Header="ImageCount" Width="1.6*"/>
-                <DataGridTextColumn Binding="{Binding Url}" Header="Url" Width="10*" />
-                <DataGridTextColumn Binding="{Binding DownloadStatus}" Header="Status" Width="2*" />
-            </DataGrid.Columns>
-        </DataGrid>
+            <StackPanel Grid.Row="0"
+                        Grid.Column="0"
+                        Orientation="Horizontal"
+                        Margin="30"
+                        Height="70">
+                <TextBox Margin="5"
+                         Width="1200"
+                         md:HintAssist.Hint="url..."
+                         md:TextFieldAssist.HasClearButton="True"
+                         Text="{Binding UrlStr,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Enter"
+                                    Command="{Binding SearchCommand}"
+                                    CommandParameter="Search" />
+                    </TextBox.InputBindings>
+                </TextBox>
+                <Button Command="{Binding SearchCommand}"
+                        CommandParameter="Search"
+                        Content="Add"
+                        Height="50"
+                        Margin="5" />
+            </StackPanel>
 
-        <StackPanel Grid.Column="0"
-                    Grid.Row="2"
-                    Orientation="Horizontal">
-            <Button Content="StartDownload"
-                    Height="50"
-                    Margin="10"
-                    Width="auto"
-                    Command="{Binding OpearCommand}"
-                    CommandParameter="StartDownload" />
-            <Button Content="OpenDownloadDir"
-                    Height="50"
-                    Margin="10"
-                    Width="auto"
-                    Command="{Binding OpearCommand}"
-                    CommandParameter="OpenDownloadDir" />
-        </StackPanel>
+
+            <DataGrid Grid.Row="1"
+                      Grid.Column="0"
+                      IsReadOnly="True"
+                      Margin="10"
+                      ItemsSource="{Binding WebDetailCollection}"
+                      AutoGenerateColumns="False"
+                      x:Name="DgData">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Id}"
+                                        Header="#"
+                                        Width="1*" />
+                    <DataGridTextColumn Binding="{Binding Title}"
+                                        Header="Title"
+                                        Width="6*" />
+                    <DataGridTextColumn Binding="{Binding ImageCount}"
+                                        Header="ImageCount"
+                                        Width="1.6*" />
+                    <DataGridTextColumn Binding="{Binding Url}"
+                                        Header="Url"
+                                        Width="10*" />
+                    <DataGridTextColumn Binding="{Binding DownloadStatus}"
+                                        Header="Status"
+                                        Width="2*" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Grid.Column="0"
+                        Grid.Row="2"
+                        Orientation="Horizontal">
+                <Button Content="StartDownload"
+                        Height="50"
+                        Margin="10"
+                        Width="auto"
+                        Command="{Binding OpearCommand}"
+                        CommandParameter="StartDownload" />
+                <Button Content="OpenDownloadDir"
+                        Height="50"
+                        Margin="10"
+                        Width="auto"
+                        Command="{Binding OpearCommand}"
+                        CommandParameter="OpenDownloadDir" />
+            </StackPanel>
+        </Grid>
     </Grid>
+    
 </Window>
