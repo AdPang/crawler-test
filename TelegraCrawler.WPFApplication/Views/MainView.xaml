@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TelegraCrawler.WPFApplication.Views"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -24,38 +25,46 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition />
-            
+
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="maxWidth" Width="1*" />
         </Grid.ColumnDefinitions>
         <DockPanel LastChildFill="False"
-                   x:Name="title"
                    Grid.Row="0"
+                   x:Name="titleBar"
                    Width="{Binding Path=ActualWidth,ElementName=mainGrid}">
+
             <StackPanel Orientation="Horizontal"
-                        DockPanel.Dock="Right">
+                        DockPanel.Dock="Right"
+                        Panel.ZIndex="1">
+
                 <Button x:Name="btnMin"
                         Margin="5"
-                        Content="—"
-                        Style="{StaticResource MaterialDesignFlatMidBgButton}" />
+                        Style="{StaticResource MaterialDesignFlatMidBgButton}" 
+                        Cursor="Hand" >
+                    <materialDesign:PackIcon Kind="WindowMinimize" />
+                </Button>
                 <Button x:Name="btnMax"
                         Margin="5"
-                        Content="☐"
-                        Style="{StaticResource MaterialDesignFlatMidBgButton}" />
+                        Style="{StaticResource MaterialDesignFlatMidBgButton}"
+                        Cursor="Hand"  >
+                    <materialDesign:PackIcon x:Name="WindowSizeControl" Kind="WindowMaximize" />
+                </Button>
                 <Button x:Name="btnClose"
                         Margin="5"
-                        Content="✕"
                         Style="{StaticResource MaterialDesignFlatMidBgButton}"
-                        Cursor="Hand" />
+                        Cursor="Hand" >
+                    <materialDesign:PackIcon Kind="WindowClose" />
+                </Button>
             </StackPanel>
+            <TextBlock Text="TelegraCrawler" Margin="20,5,5,5" VerticalAlignment="Center" Width="{Binding Path=ActualWidth,ElementName=mainGrid}" Panel.ZIndex="0"/>
         </DockPanel>
-        
+
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="auto" />
-
 
             </Grid.ColumnDefinitions>
 
@@ -84,14 +93,15 @@
                 </TextBox>
                 <Button Command="{Binding SearchCommand}"
                         CommandParameter="Search"
-                        Content="Add"
                         Height="50"
+                        FontSize="23"
+                        Content="Add"
                         Margin="5" />
             </StackPanel>
 
-
             <DataGrid Grid.Row="1"
                       Grid.Column="0"
+                      SelectedItem="{Binding CurrentSelectedColumn}"
                       IsReadOnly="True"
                       Margin="10"
                       ItemsSource="{Binding WebDetailCollection}"
@@ -134,5 +144,5 @@
             </StackPanel>
         </Grid>
     </Grid>
-    
+
 </Window>

@@ -23,12 +23,6 @@ namespace TelegraCrawler.WPFApplication.ViewModels
             this.crawlerHelper = crawlerHelper;
             InitCommands();
         }
-        private void ActionX(object fileName)
-        {
-            Console.WriteLine(fileName);
-            Thread.Sleep(2000);
-            Console.WriteLine(fileName);
-        }
         private void InitCommands()
         {
             SearchCommand = new DelegateCommand(() =>
@@ -58,9 +52,9 @@ namespace TelegraCrawler.WPFApplication.ViewModels
                 {
                     case "StartDownload":
                         StartDownloadImage();
-
                         break;
                     case "OpenDownloadDir":
+                        IOHelper.OpenFileDir(CurrentSelectedColumn.DownloadDirPath);
                         break;
                     default:
                         break;
@@ -89,6 +83,14 @@ namespace TelegraCrawler.WPFApplication.ViewModels
         #region properties
         public DelegateCommand SearchCommand { get; private set; }
         public DelegateCommand<string> OpearCommand { get; set; }
+        private WebDetail currentSelectedColumn = new();
+
+        public WebDetail CurrentSelectedColumn
+        {
+            get { return currentSelectedColumn; }
+            set { currentSelectedColumn = value; RaisePropertyChanged(); }
+        }
+
 
         private ObservableCollection<WebDetail> webDetailCollection = new();
         private string urlStr = "";

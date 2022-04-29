@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,12 +30,12 @@ namespace TelegraCrawler.WPFApplication.Views
                 if (this.WindowState == WindowState.Maximized)
                 {
                     this.WindowState = WindowState.Normal;
-                    this.btnMax.Content = "☐";
+                    WindowSizeControl.Kind = PackIconKind.WindowMaximize;
                 }
                 else
                 {
                     this.WindowState = WindowState.Maximized;
-                    this.btnMax.Content = "❐";
+                    WindowSizeControl.Kind = PackIconKind.WindowRestore;
                 }
             };
             btnClose.Click += (s, e) =>
@@ -43,7 +44,7 @@ namespace TelegraCrawler.WPFApplication.Views
                 this.Close();
             };
 
-            title.MouseMove += (s, e) =>
+            titleBar.MouseMove += (s, e) =>
             {
                 if (e.LeftButton == MouseButtonState.Pressed)
                 {
@@ -51,6 +52,25 @@ namespace TelegraCrawler.WPFApplication.Views
                 }
             };
 
+
+            titleBar.MouseLeftButtonDown += (s, e) =>
+            {
+                
+                if (e.ChangedButton == MouseButton.Left && e.ClickCount == 2)
+                {
+                    if (this.WindowState == WindowState.Normal)
+                    {
+                        this.WindowState = WindowState.Maximized;
+
+                        WindowSizeControl.Kind = PackIconKind.WindowRestore;
+                    }
+                    else
+                    {
+                        this.WindowState = WindowState.Normal;
+                        WindowSizeControl.Kind = PackIconKind.WindowMaximize;
+                    }
+                }
+            };
         }
     }
 }
