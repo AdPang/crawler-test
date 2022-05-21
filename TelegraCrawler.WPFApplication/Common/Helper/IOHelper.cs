@@ -14,12 +14,14 @@ namespace TelegraCrawler.WPFApplication.Common.Helper
         {
             if (string.IsNullOrEmpty(parentDir) || string.IsNullOrWhiteSpace(parentDir)) new Exception($"parameter:{parentDir} is null Or whiteSpace!");
             if (string.IsNullOrEmpty(dirName) || string.IsNullOrWhiteSpace(dirName)) new Exception($"parameter:{dirName} is null Or whiteSpace!");
+            var chars = new List<char> { '\\', '/', '\"', '?', '|', '*', ':' };
+            chars.ForEach(c => dirName = dirName.Replace(c, '_'));
             string path = @$"{parentDir}\{dirName}";
             try
             {
-                
                 if (!Directory.Exists(path))
                 {
+
                     Directory.CreateDirectory(path);
                     return path;
                 }
@@ -32,6 +34,7 @@ namespace TelegraCrawler.WPFApplication.Common.Helper
                         break;
                     }
                 }
+                
                 Directory.CreateDirectory(path);
                 return path;
             }
