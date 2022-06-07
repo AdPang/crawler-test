@@ -1,12 +1,11 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿
 
 namespace 爬虫测试
 {
     public class Program
     {
-        public static void Main()
+        public async static Task Main()
         {
-
         }
 
         
