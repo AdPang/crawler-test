@@ -1,363 +1,162 @@
 ﻿
 
-namespace 爬虫测试
+
+using System.Collections;
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
+
+namespace 爬虫测试;
+
+
+
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public async static Task Main()
-        {
-        }
-
-        
-
+        Test test = new Test();
+        Console.WriteLine("aaaa");
+        Console.WriteLine(test.MyStr.ToString());
+        Console.WriteLine("bbbb");
     }
+}
+
+public class Test 
+{
+    public string MyStr { get; set; }
+
 }
 
 
 
 
 
-
-/*
-11.任意给定一个字符串数组string[] factors，求其中两个字符串长度乘积 length(factors [i]) * length (factors[j]) 的最大值，要求factors [i]和factors [j]自身及相互之间都不能含有相同的字母。假定所有字符串的字母都是小写。如果没有符合条件的两个单词，返回 0。
-条件：可以使用数组和string的Length方法/属性，不能使用.net库基础类型以外的数据类型和Liqu方法。
-示例 1：输入: ["adcw","daz","too","dar","xftn","adcbef"]   输出: 16  ("adcw", "xftn")
-示例 2：输入: ["a","ad","adc","b","cb","dcb","adcb"]   输出: 4  ("ad ", "cb")
-示例 3：输入: ["c","cc","ccc","cccc"]   输出: 0  (没有符合条件的两个单词)
-示例 4：输入: ["cc","cdd","dddd"]   输出: 8  ("cc","dddd")
- */
-
-
-//using System;
-
-//string? input = Console.ReadLine();
-//DateTime startTime = DateTime.Now;
-//input = input.TrimStart('[').TrimEnd(']');
-//var strArr = input.Split(',').ToList();
-//List<string> newStrlist = new();
-
-//strArr.ForEach(x =>
+//int[] ints1 = new int[9999];
+//int[] ints2 = new int[9999];
+//Random random = new Random();
+//for (int i = 0; i < ints1.Length; i++)
 //{
-//    var tempStr = x.TrimStart('\"').TrimEnd('\"');
-//    if (!CheckRepeat(tempStr))
-//    {
-//        newStrlist.Add(tempStr);
-//    }
-//});
-//int firstStrIndex = 0;
-//int secoundStrIndex = 0;
-//int maxProduct = 0;
-//newStrlist.ForEach(firstStr =>
+//    ints1[i] = random.Next(100000);
+//    ints2[i] = ints1[i];
+//}
+//var startTime = DateTime.Now;
+//QuickSort(ints1, 0, ints1.Length - 1);
+//var endTime = DateTime.Now;
+//Console.WriteLine($"QuickSort used time:{startTime - endTime}");
+//startTime = DateTime.Now;
+//PopSort(ints2);
+//endTime = DateTime.Now;
+//Console.WriteLine($"PopSort used time:{startTime - endTime}");
+
+
+
+//foreach (var i in ints1)
 //{
-//    var currentIndex = newStrlist.IndexOf(firstStr);
-//    var tempStrList = newStrlist.Skip(currentIndex + 1).ToList();
-//    tempStrList.ForEach(secondStr =>
+//    Console.WriteLine(i);
+//}
+
+//foreach (var i in ints2)
+//{
+//    Console.WriteLine(i);
+//}
+
+//static void PopSort(int[] arr)
+//{
+//    for (int i = 0; i < arr.Length - 1; i++)
 //    {
-//        var hasRepeat = false;
-//        foreach (var c in firstStr)
+//        for (int j = i ; j < arr.Length; j++)
 //        {
-//            if (secondStr.Contains(c))
+//            if (arr[i] > arr[j])
 //            {
-//                hasRepeat = true;
-//                break;
+//                int t = arr[i];
+//                arr[i] = arr[j];
+//                arr[j] = t;
 //            }
 //        }
-//        if (!hasRepeat)
+
+//    }
+//}
+
+//static void QuickSort(int[] arr,int start,int end)
+//{
+//    if (start < end)
+//    {
+//        int stard = arr[start];
+//        int low = start;
+//        int high = end;
+//        while(low < high)
 //        {
-//            if (maxProduct <= firstStr.Length * secondStr.Length)
+//            while(low < high && stard <= arr[high])
 //            {
-//                maxProduct = firstStr.Length * secondStr.Length;
-//                firstStrIndex = newStrlist.IndexOf(firstStr);
-//                secoundStrIndex = newStrlist.IndexOf(secondStr);
+//                high--;
+//            }
+//            arr[low] = arr[high];
+//            while (low < high && arr[low] <= stard)
+//            {
+//                low++;
+//            }
+//            arr[high] = arr[low];
+//        }
+//        arr[low] = stard;
+//        QuickSort(arr, start, low);
+//        QuickSort(arr, low + 1, end);
+//    }
+//}
+
+
+
+
+
+
+
+
+
+
+//using System.Collections.Specialized;
+//using System.Configuration;
+//using System.IO;
+
+//Console.WriteLine(SystemSettingsModel.GetDownloadPath());
+
+//SystemSettingsModel.SetDownloadPath("C:\\Users\\AdPang\\Desktop");
+
+//Console.WriteLine(SystemSettingsModel.GetDownloadPath());
+
+//public static class SystemSettingsModel
+//{
+//    private static string downloadPath = string.Empty;
+
+//    static SystemSettingsModel()
+//    {
+//        downloadPath = Environment.CurrentDirectory;
+//        string? configPath = ConfigurationManager.AppSettings["DownloadPath"];
+//        if (string.IsNullOrEmpty(configPath))
+//        {
+//            return;
+//        }
+//        else 
+//        {
+//            var dir = new DirectoryInfo(configPath);
+//            if (dir.Exists)
+//            {
+//                downloadPath = configPath;
 //            }
 //        }
-//    });
-//});
-//if (maxProduct!=0)
-//{
-//    Console.WriteLine($"{maxProduct}  (\"{newStrlist[firstStrIndex]}\",\"{newStrlist[secoundStrIndex]}\")");
-//}
-//else
-//{
-//    Console.WriteLine("0  (没有符合条件的两个单词)");
-//}
-
-//bool CheckRepeat(string str)
-//{
-//    for (int i = 0; i < str.Length - 1; i++)
-//    {
-//        for (int j = i + 1; j < str.Length; j++)
-//        {
-//            if (str[i] == str[j])
-//            {
-//                return true;
-//            }
-//        }
 //    }
-//    return false;
-//}
 
-//newStrlist.ForEach(x => global::System.Console.WriteLine(x.ToString()));
-
-/*int maxProduct = 0;
-int firstIndex = 0, secondIndex = 0;
-for (int i = 0; i < strArr.Length - 1; i++)
-{
-    for (int j = i + 1; j < strArr.Length; j++)
-    {
-        bool flag = false;
-        string str1 = strArr[i].TrimEnd('\"').TrimStart('\"');
-        string str2 = strArr[j].TrimEnd('\"').TrimStart('\"');
-        if (CheckRepeat(str1) || CheckRepeat(str2))
-        {
-            continue;
-        }
-        foreach (char c in str2)
-        {
-            if (str1.IndexOf(c) >= 0)
-            {
-                flag = true;
-                break;
-            }
-        }
-        if (flag)
-        {
-            continue;
-        }
-        if (maxProduct < str1.Length * str2.Length)
-        {
-            maxProduct = str1.Length * str2.Length;
-            firstIndex = i;
-            secondIndex = j;
-        }
-    }
-}
-Console.WriteLine("耗时:" + (DateTime.Now - startTime));
-if (maxProduct > 0)
-{
-    Console.WriteLine($"{maxProduct} ({strArr[firstIndex]},{strArr[secondIndex]})");
-}
-else
-{
-    Console.WriteLine(0);
-}
-
-bool CheckRepeat(string str)
-{
-    for (int i = 0; i < str.Length - 1; i++)
-    {
-        for (int j = i + 1; j < str.Length; j++)
-        {
-            if (str[i] == str[j])
-            {
-                return true;
-            }
-        }
-    }
-    return false;
-}
-*/
-
-//System.Diagnostics.Process process = new System.Diagnostics.Process();
-//var a = FileTypeRegister.GetFileTypeRegInfo(".docx");
-
-
-//Console.WriteLine(path);
-//DirectoryInfo directory = new DirectoryInfo(path);
-//List<FileInfo> fileInfos = new();
-//DateTime startTime = DateTime.Now;
-//GetAllFileFromDir(directory, fileInfos);
-//DateTime endTime = DateTime.Now;
-//Console.WriteLine("用时:" + (endTime - startTime));
-//fileInfos.ForEach(x =>
-//{
-//    global::System.Console.WriteLine(x.FullName);
-//});
-
-//void GetAllFileFromDir(DirectoryInfo dir,List<FileInfo> fileInfos)
-//{
-//    var dirFiles = dir.GetFiles();
-//    if (dirFiles.Length > 0)
+//    public static string GetDownloadPath()
 //    {
-//        fileInfos.AddRange(dirFiles);
+//        return downloadPath;
 //    }
-//    var dirChildrenDir = dir.GetDirectories();
-//    foreach (var dirChild in dirChildrenDir)
+//    public static string SetDownloadPath(string path)
 //    {
-//        GetAllFileFromDir(dirChild, fileInfos);
+//        var dir = new DirectoryInfo(path);
+//        if (!dir.Exists) { return string.Empty; }
+//        Configuration cfa = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+//        cfa.AppSettings.Settings["DownloadPath"].Value = dir.FullName;
+//        cfa.Save(ConfigurationSaveMode.Modified);
+//        downloadPath = dir.FullName;
+//        return downloadPath;
 //    }
 //}
 
 
-//while (true)
-//{
-
-//    Thread.Sleep(3000);
-//    Console.WriteLine("还活着");
-//}
-
-/*List<string> fhs = new List<string>()
-{
-    "ipx-120","ssis-301","abw-044","aas-grh","sag-458"
-};
-var sb = new StringBuilder();
-var a = GetHDSerial("c", sb);
-Console.WriteLine(sb.ToString());
-
-var b = Test.GetDiskVolume("f"); //8ece2b5c e86ca35 ba5883ff                c97e2ce6 f05e8b66 b39d6
-Console.WriteLine(b);*/
-
-//JavaScriptSerializer serializer = new JavaScriptSerializer();
-
-/*
-
-#region 将List<>转换为Json
-string List2JSON(List<object> objlist, string classname)
-{
-    string result = "{";
-    if (classname.Equals(typeof(string)))//如果没有给定类的名称，那么自做聪明地安一个
-    {
-        object o = objlist[0];
-        classname = o.GetType().ToString();
-    }
-    result += "\"" + classname + "\":[";
-    bool firstline = true;//处理第一行前面不加","号
-    foreach (object oo in objlist)
-    {
-        if (!firstline)
-        {
-            result = result + "," + OneObjectToJSON(oo);
-        }
-        else
-        {
-            result = result + OneObjectToJSON(oo) + "";
-            firstline = false;
-        }
-    }
-    return result + "]}";
-}
-
-string OneObjectToJSON(object o)
-{
-    string result = "{";
-    List<string> ls_propertys = new List<string>();
-    ls_propertys = GetObjectProperty(o);
-    foreach (string str_property in ls_propertys)
-    {
-        if (result.Equals("{"))
-        {
-            result = result + str_property;
-        }
-        else
-        {
-            result = result + "," + str_property + "";
-        }
-    }
-    return result + "}";
-}
-
-List<string> GetObjectProperty(object o)
-{
-    List<string> propertyslist = new List<string>();
-    PropertyInfo[] propertys = o.GetType().GetProperties();
-    foreach (PropertyInfo p in propertys)
-    {
-        propertyslist.Add("\"" + p.Name.ToString() + "\":\"" + p.GetValue(o, null) + "\"");
-    }
-    return propertyslist;
-}
-
-#endregion
-
-int GetHDSerial(string driveLetter, StringBuilder serialNumber)
-{
-    try
-    {
-        ManagementObjectSearcher mc1 = new ManagementObjectSearcher("select * from Win32_DiskDrive");
-        Dictionary<int, string> dic_indexAndServerNumber = new Dictionary<int, string>();
-        foreach (ManagementObject item in mc1.Get())
-        {
-            int index = int.Parse(item["Index"].ToString());
-            string SerialNumber = item["SerialNumber"].ToString().Trim();
-            if (!dic_indexAndServerNumber.ContainsKey(index))
-            {
-                dic_indexAndServerNumber.Add(index, SerialNumber);
-            }
-        }
-        mc1 = new ManagementObjectSearcher("select * from Win32_LogicalDiskToPartition");
-        Dictionary<string, string> dic_logicaldisk = new Dictionary<string, string>();
-        foreach (ManagementObject item in mc1.Get())
-        {
-            string driname = item["Dependent"].ToString().Split('=')[1].Split(':')[0].Replace("\"", "");
-            driveLetter = driveLetter.Replace(":", "");
-            driveLetter = driveLetter.ToUpper();
-            if (driveLetter == driname)
-            {
-                int index = int.Parse(item["Antecedent"].ToString().Split('=')[1].Split(',')[0].Split('#')[1]);
-                if (dic_indexAndServerNumber.ContainsKey(index))
-                {
-                    serialNumber.Append(dic_indexAndServerNumber[index]);
-                    return 0;
-                }
-            }
-
-        }
-        return -1;
-    }
-    catch (Exception ex)
-    {
-        return -1;
-    }
-}
-
-Dictionary<string, string> PaTmd(List<string> fhs)
-{
-    var data = new CrawlerMain(browser: BrowserEnum.Edge, isEnableVerboseLogging: true, size: new Size(800, 1200));
-    data.GoToUrl("https://javdb.com/");
-    var success = data.FindElementsByClassName("is-success");
-    success.Click();
-    Thread.Sleep(200);
-
-    Dictionary<string, string> results = new Dictionary<string, string>();
-
-    foreach (var fh in fhs)
-    {
-        var url = GetSearchUrl(fh);
-        data.GoToUrl(url);
-        Thread.Sleep(200);
-        var strspilt = SearchView(data, fh).Split('♀').ToList();
-        strspilt.RemoveAt(strspilt.Count - 1);
-        var actors = string.Join(",", strspilt);
-        results.Add(fh, actors);
-    }
-    return results;
-}
-
-string SearchView(CrawlerMain data, string fh)
-{
-
-    fh = fh.ToUpperInvariant();
-    var gridItems = data.FindElementsByClassNames("grid-item");
-    var girdItem = gridItems.Where(x => x.Text.Contains(fh)).FirstOrDefault();
-    girdItem.Click();
-    Thread.Sleep(300);
-
-    return GetActors(data);
-}
-
-
-string GetSearchUrl(string fh)
-{
-    return "https://javdb.com/search?q=" + fh + "&f=all";
-}
-
-string GetActors(CrawlerMain data)
-{
-    var wd = data.FindElementsByClassNames("value");
-
-    var item = wd.Where(x => x.Text.Contains('♀')).FirstOrDefault();
-
-    return item.Text;
-}
-
-*/
